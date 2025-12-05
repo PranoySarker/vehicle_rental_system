@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import config from "./config";
 import initDB from "./config/db";
 import { userRoutes } from "./modules/user/user.routes";
+import { authRoutes } from "./modules/auth/auth.routes";
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/v1/users", userRoutes);
+
+app.use("/api/v1/auth", authRoutes);
 
 app.use((req: Request, res: Response) => {
   res.status(404).send({
