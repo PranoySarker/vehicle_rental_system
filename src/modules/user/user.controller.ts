@@ -2,30 +2,6 @@ import { Request, Response } from "express";
 import { pool } from "../../config/db";
 import { userServices } from "./user.service";
 
-const createUser = async (req: Request, res: Response) => {
-  const { name, email, password, phone, role } = req.body;
-  try {
-    const result = await userServices.createUser(
-      name,
-      email,
-      password,
-      phone,
-      role
-    );
-    res.status(201).send({
-      success: true,
-      message: "User created successfully",
-      data: result.rows[0],
-    });
-  } catch (error) {
-    res.status(500).send({
-      success: false,
-      message: "Something went wrong",
-      error: (error as Error).message,
-    });
-  }
-};
-
 const getUsers = async (req: Request, res: Response) => {
   try {
     const result = await userServices.getUsers();
@@ -126,7 +102,6 @@ const deleteUser = async (req: Request, res: Response) => {
 };
 
 export const userControllers = {
-  createUser,
   getUsers,
   getSingleUser,
   updateUser,
